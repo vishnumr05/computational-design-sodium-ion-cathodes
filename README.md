@@ -61,7 +61,7 @@ Three material systems are investigated:
 The ZnYGe predictor uses three reduced pair-PCT inputs:
 
 ```text
-cc, bb, aa
+Ge-Ge, Y-Y, Zn-Zn
 ```
 
 These are supplied to the prediction function in this order.
@@ -77,7 +77,7 @@ The available trained models are:
 The NiFeTi predictor uses three reduced pair-PCT inputs:
 
 ```text
-cc, ab, bc
+Ti-Ti, Ni-Fe, Fe-Ti
 ```
 
 These are supplied to the prediction function in this order.
@@ -93,7 +93,7 @@ The available trained models are:
 The NiCoMn predictor uses three reduced pair-PCT inputs:
 
 ```text
-aa, ab, bb
+Ni-Ni, Ni-Co, Co-Co
 ```
 
 These are supplied to the prediction function in this order.
@@ -132,6 +132,7 @@ NiCoMn_T3b_dataset_test.csv
 
 These datasets are used to test and evaluate the trained models for T3b-related predictions.
 
+The datasets used in this research have been excluded from this repository, as they are managed by the research group. This repository contains the code associated with the proposed methodology and its implementation. Access to the datasets, if required, should be sought from the respective data owners, subject to their permission and applicable policies.
 ---
 
 ## 4. Feature Reduction
@@ -204,19 +205,19 @@ Each predictor contains a `predict_ratio()` function.
 ### ZnYGe
 
 ```python
-predict_ratio(cc, bb, aa, model_type="linear")
+predict_ratio(Ge-Ge, Y-Y, Zn-Zn, model_type="linear")
 ```
 
 ### NiFeTi
 
 ```python
-predict_ratio(cc, ab, bc, model_type="poly")
+predict_ratio(Ti-Ti, Ni-Fe, Fe-Ti, model_type="poly")
 ```
 
 ### NiCoMn
 
 ```python
-predict_ratio(aa, ab, bb, model_type="poly")
+predict_ratio(Ni-Ni, Ni-Co, Co-Co, model_type="poly")
 ```
 
 The default model type differs between systems, so the desired model should be specified explicitly when comparing model predictions.
@@ -317,9 +318,9 @@ The results indicate that Polynomial Regression provides the highest R² for the
 
 The Random Forest feature importances provide an indication of the relative contribution of the three reduced pair-PCT inputs.
 
-- **NiCoMn:** AA_pct is the most influential feature (0.5328), followed by AB_pct (0.3280) and BB_pct (0.1392).
-- **NiFeTi:** CC_pct is the most influential feature (0.4899), followed by BC_pct (0.2633) and AB_pct (0.2468).
-- **ZnYGe:** CC_pct strongly dominates the feature importance (0.9339), with AA_pct (0.0392) and BB_pct (0.0269) contributing substantially less.
+- **NiCoMn:** NiNi_pct is the most influential feature (0.5328), followed by NiCo_pct (0.3280) and CoCo_pct (0.1392).
+- **NiFeTi:** TiTi_pct is the most influential feature (0.4899), followed by FeTi_pct (0.2633) and NiFe_pct (0.2468).
+- **ZnYGe:** GeGe_pct strongly dominates the feature importance (0.9339), with ZnZn_pct (0.0392) and YY_pct (0.0269) contributing substantially less.
 
 These feature-importance values are specific to the Random Forest models and should not be interpreted as regression coefficients.
 ---
